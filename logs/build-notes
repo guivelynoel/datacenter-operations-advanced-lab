@@ -50,6 +50,12 @@
 - Documented incidents and recovery steps
 
 
+## Day 6
+- Configured persistent NFS mount using fstab
+- Enabled UFW firewall on both nodes
+- Enforced Mgmt vs Prod traffic at firewall level
+- Performed system health checks
+- Validated reboot persistence
 
 
 
