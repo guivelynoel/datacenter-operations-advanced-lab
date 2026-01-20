@@ -150,3 +150,10 @@ alone is insufficient; the socket must be restarted.
 **Resolution**
 - No action required (expected behavior)
 
+## Issue 011 — NFS Mount Fails on Management Network (Expected)
+
+**Cause**
+NFS exports restricted to production subnet only.
+
+**Result**
+Mount attempts via management IP fail as designed.
