@@ -21,9 +21,24 @@
 - Export /data/shared to 10.10.10.0/24
 - Mount from DC-Node-02 and validate file operations
 
-## SOP-005: Health Checks
+## SOP-005: Persistent NFS Mount
+
+- Configured NFS mount using /etc/fstab
+- Used _netdev to ensure safe boot behavior
+- Validated with mount -a and reboot test
+
+## SOP-006: Firewall Enforcement
+
+- Enabled UFW
+- Allowed SSH only on management network
+- Restricted NFS to production network
+- Validated rules with ufw status
+
+
+## SOP-007: Health Checks
 - CPU: `uptime`
 - Memory: `free -h`
 - Disk: `df -h`
 - Services: `systemctl status ssh nfs-server`
+  
 
