@@ -4,6 +4,13 @@
 ## Objective
 Separate administration from production/service traffic using dual NICs.
 
+
+## VirtualBox Configuration (macOS)
+
+- Adapter 1: Host-only Network (Management)
+- Adapter 2: Internal Network "prod-net" (Production)
+- Deprecated Host-only Adapter mode not used
+
 ## Networks
 ### Mgmt Network (Host-only)
 - Subnet: 192.168.56.0/24
