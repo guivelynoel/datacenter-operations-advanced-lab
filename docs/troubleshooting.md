@@ -68,4 +68,19 @@
 - Always verify global VirtualBox networks exist
   before assigning VM network adapters.
 
+## Issue 007 — Expected Netplan File Not Found
+
+**Symptoms**
+- /etc/netplan/00-installer-config.yaml not present
+
+**Cause**
+- Ubuntu generates different Netplan filenames depending on installer
+  and network backend.
+
+**Resolution**
+- Listed /etc/netplan directory
+- Edited the existing Netplan YAML file instead of creating a new one
+
+**Validation**
+- Static IPs applied successfully using Netplan
 
