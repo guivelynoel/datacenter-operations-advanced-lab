@@ -157,3 +157,28 @@ NFS exports restricted to production subnet only.
 
 **Result**
 Mount attempts via management IP fail as designed.
+
+## Issue 012 — NFS Share Unavailable Due to Service Outage
+
+**Symptoms**
+Client unable to read/write to shared directory.
+
+**Cause**
+NFS service stopped on server.
+
+**Resolution**
+Restarted nfs-server service.
+
+**Validation**
+Storage access restored.
+
+## Issue 013 — Permission Denied on NFS Share
+
+**Cause**
+Incorrect permissions on exported directory.
+
+**Resolution**
+Restored ownership and permissions.
+
+**Validation**
+Client write access restored.
