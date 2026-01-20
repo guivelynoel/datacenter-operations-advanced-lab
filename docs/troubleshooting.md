@@ -84,3 +84,24 @@
 **Validation**
 - Static IPs applied successfully using Netplan
 
+- ## Issue 008 — SSH Binding Changes Not Applied (Ubuntu 24.04)
+
+**Symptoms**
+- SSH continued to listen on 0.0.0.0:22 despite ListenAddress and AddressFamily settings
+- `ss -tulpn` still showed global listening
+- Restarting `ssh` service alone did not resolve the issue
+
+**Environment**
+- OS: Ubuntu Server 24.04 LTS
+- Service: OpenSSH
+- Init system: systemd (socket activation enabled)
+
+**Root Cause**
+- SSH is socket-activated via `ssh.socket` on Ubuntu 24.04
+- Configuration changes in sshd_config are not applied
+  until systemd reloads units and restarts the socket
+
+**Resolution**
+1. Reloaded systemd units:
+
+
