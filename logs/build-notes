@@ -38,11 +38,19 @@
 - Validated SSH isolation using ss command
 
 
-
-
+## Day 5
 - Temporarily enabled NAT adapter to allow package updates
 - Confirmed internet access for maintenance tasks
 - Removed NAT adapter after updates to preserve isolation
+- Deployed NFS shared storage on DC-Node-01
+- Restricted exports to production network only
+- Mounted shared storage on DC-Node-02
+- Validated correct traffic isolation
+- Simulated service outage and permission failures
+- Documented incidents and recovery steps
+
+
+
 
 
 
