@@ -182,3 +182,25 @@ Restored ownership and permissions.
 
 **Validation**
 Client write access restored.
+
+## Issue 014 — exportfs Fails Due to Invalid Option in /etc/exports
+
+**Symptoms**
+- exportfs -a fails
+- Error: unknown keyword "no_sub"
+- No file systems exported
+
+**Cause**
+- Typo or truncated option in /etc/exports
+- NFS requires exact option names
+
+**Resolution**
+- Corrected export options to use full `no_subtree_check`
+- Re-applied exports using exportfs -av
+
+**Validation**
+- exportfs -v shows active export
+- Client successfully mounts and writes to share
+
+
+
