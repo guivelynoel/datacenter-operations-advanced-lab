@@ -134,4 +134,17 @@ Validated NFS operation via kernel threads and client access.
 Lesson Learned:
 Not all active services maintain a running process.
 
+## Incident 010 — NFS Permission Misconfiguration
+
+Impact:
+Client unable to write to shared storage.
+
+Root Cause:
+Incorrect directory permissions.
+
+Resolution:
+Restored correct ownership and permissions.
+
+Lesson Learned:
+Permissions are critical for shared storage reliability.
 
