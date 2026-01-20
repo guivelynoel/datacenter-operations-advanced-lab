@@ -4,7 +4,9 @@
 - Prepared VirtualBox networks: Host-only Mgmt + Internal Prod
 
 ## Day 1
-- Created DC-Node-01 and DC-Node-02
-- Installed Ubuntu Server + OpenSSH
-- Updated packages and validated ssh service
+- Created DC-Node-01 and DC-Node-02 on VirtualBox (macOS host)
+- Installed latest Ubuntu Server on both nodes
+- Enabled OpenSSH during installation
+- Updated system packages
+- Verified SSH service is running
 
