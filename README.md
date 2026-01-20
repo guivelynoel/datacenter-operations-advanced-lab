@@ -1,4 +1,4 @@
-# Data Center Operations Advanced Lab (2 VMs / Dual-NIC)
+# Data Center Operations medium Lab (2 VMs / Dual-NIC)
 
 ## Overview
 This repository documents a medium+ level, two-node lab designed to simulate
