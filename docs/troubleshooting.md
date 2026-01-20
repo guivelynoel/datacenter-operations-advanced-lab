@@ -133,4 +133,20 @@ alone is insufficient; the socket must be restarted.
 - Internet access in data centers is explicit and controlled,
   not assumed.
 
+## Issue 010 — nfs-server Service Shows "active (exited)"
+
+**Symptoms**
+- systemctl status nfs-server shows active (exited)
+
+**Cause**
+- nfs-server is a oneshot systemd service
+- NFS runs as kernel threads, not a persistent daemon
+
+**Validation**
+- nfsd kernel threads present
+- Exports visible via exportfs
+- Client can mount and write to share
+
+**Resolution**
+- No action required (expected behavior)
 
