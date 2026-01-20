@@ -114,5 +114,23 @@
 - On socket-activated services, restarting the service
 alone is insufficient; the socket must be restarted.
 
+## Issue 009 — apt update Fails Due to No Internet Access
+
+**Symptoms**
+- apt update fails with "Failed to fetch" errors
+- No external connectivity
+
+**Cause**
+- Servers are deployed on isolated management and production networks
+- No default gateway configured (by design)
+
+**Resolution**
+- Temporarily enabled NAT adapter for maintenance
+- Performed package updates
+- Removed NAT adapter after maintenance window
+
+**Lesson Learned**
+- Internet access in data centers is explicit and controlled,
+  not assumed.
 
 
