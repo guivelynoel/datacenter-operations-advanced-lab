@@ -10,6 +10,13 @@ Separate administration from production/service traffic using dual NICs.
 - Adapter 1: Host-only Network (Management)
 - Adapter 2: Internal Network "prod-net" (Production)
 - Deprecated Host-only Adapter mode not used
+-When using Host-only Network on macOS, a specific network
+        (e.g., vboxnet0) must be selected. Leaving the name unset
+        results in invalid VM settings.
+    
+
+        
+
 
 ## Networks
 ### Mgmt Network (Host-only)
