@@ -105,3 +105,18 @@ For socket-activated services, restarting the service alone
 is insufficient; the socket must be reloaded.
 
 ---
+
+## Incident 008 — No Internet Connectivity for Package Updates
+
+**Impact**:
+Unable to update packages using apt.
+
+**Root Cause:**
+No default route to the internet due to isolated network design.
+
+**Resolution**:
+Temporarily enabled NAT adapter for maintenance operations.
+
+**Lesson Learned**:
+Maintenance access should be temporary and controlled.
+
