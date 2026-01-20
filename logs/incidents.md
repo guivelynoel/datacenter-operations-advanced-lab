@@ -1,24 +1,107 @@
-# Incidents
+# Incident Log — Data Center Operations Lab
 
-## Incident 001 (Planned): NFS Service Outage
-## Incident 003 (Setup Issue) — Host-only Network Missing
+This document records operational issues encountered during lab setup,
+including root cause analysis, resolution steps, and lessons learned.
+Some incidents were documented retroactively to ensure accuracy and completeness.
 
-Impact:
-VM could not start due to invalid network configuration.
+---
 
-Root Cause:
-Host-only network not created at VirtualBox global level.
+## Incident 001 — Host-only Network Missing (VirtualBox macOS)
 
-Resolution:
-Created vboxnet0 via VirtualBox Tools → Network.
+**Impact**
+VM could not be configured with Host-only Network; adapter name unavailable.
 
-Lesson Learned:
+**Root Cause**
+No Host-only Network existed at the VirtualBox global level.
+
+**Resolution**
+Created Host-only Network via VirtualBox Tools → Network.
+
+**Validation**
+Host-only network selectable as vboxnet0; VM settings validated.
+
+**Lesson Learned**
 Always verify global network objects before VM assignment.
 
+---
 
-## Incident 002 (Planned): Permission Denied on Shared Storage
-- Impact:
-- Root cause:
-- Resolution:
-- Prevention:
+## Incident 002 — Invalid VM Network Configuration
 
+**Impact**
+VirtualBox displayed "Invalid settings detected" and blocked VM startup.
+
+**Root Cause**
+Host-only Network selected without specifying a network name.
+
+**Resolution**
+Selected vboxnet0 after creating Host-only Network.
+
+**Validation**
+Invalid settings warning cleared; VM booted successfully.
+
+**Lesson Learned**
+VirtualBox requires explicit network selection on macOS.
+
+---
+
+## Incident 003 — Expected Netplan File Not Found
+
+**Impact**
+Static IP configuration could not proceed using assumed filename.
+
+**Root Cause**
+Ubuntu Server generated a different Netplan configuration file
+based on installer and OS version.
+
+**Resolution**
+Listed `/etc/netplan` directory and edited the existing YAML file.
+
+**Validation**
+Static IPs applied successfully using Netplan.
+
+**Lesson Learned**
+Never assume Netplan filenames; always inspect the directory.
+
+---
+
+## Incident 004 — SSH Isolation Configuration Ignored
+
+**Impact**
+SSH continued listening on all interfaces despite ListenAddress settings.
+
+**Root Cause**
+OpenSSH configuration overridden by systemd socket activation.
+
+**Resolution**
+Investigated sshd_config.d overrides and systemd behavior.
+
+**Validation**
+Issue narrowed down to socket activation control.
+
+**Lesson Learned**
+Modern Ubuntu versions may not apply service changes
+through traditional config files alone.
+
+---
+
+## Incident 005 — SSH Socket Activation Prevented Interface Binding
+
+**Impact**
+SSH remained bound to 0.0.0.0:22 even after configuration updates.
+
+**Root Cause**
+OpenSSH managed by systemd socket activation (`ssh.socket`).
+
+**Resolution**
+Reloaded systemd units and restarted ssh.socket:
+- `systemctl daemon-reload`
+- `systemctl restart ssh.socket`
+
+**Validation**
+SSH bound only to management IP as verified by `ss -tulpn`.
+
+**Lesson Learned**
+For socket-activated services, restarting the service alone
+is insufficient; the socket must be reloaded.
+
+---
