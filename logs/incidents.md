@@ -120,3 +120,18 @@ Temporarily enabled NAT adapter for maintenance operations.
 **Lesson Learned**:
 Maintenance access should be temporary and controlled.
 
+## Incident 009 — Misinterpreted nfs-server Service State
+
+Impact:
+Initial concern about service availability.
+
+Root Cause:
+Misunderstanding of systemd oneshot service behavior.
+
+Resolution:
+Validated NFS operation via kernel threads and client access.
+
+Lesson Learned:
+Not all active services maintain a running process.
+
+
