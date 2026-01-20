@@ -1,1 +1,3 @@
+# Documentation example only
+/data/shared 10.10.10.0/24(rw,sync,no_subtree_check)
 
