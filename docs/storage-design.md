@@ -16,3 +16,13 @@ restricted to the production subnet.
 - Create a test file from client and confirm visibility on server
 - Simulate service outage and recover (incident documentation)
 
+## Implementation
+
+- NFS server hosted on DC-Node-01
+- Export restricted to production subnet (10.10.10.0/24)
+- Clients mount using production IP only
+
+## Validation
+
+- File creation from client visible on server
+- Mount attempts via management network fail (expected)
