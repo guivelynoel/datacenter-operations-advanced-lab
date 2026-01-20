@@ -1,1 +1,6 @@
+# Documentation example only
+Port 22
+PermitRootLogin no
+# Bind SSH to management IP only
+ListenAddress 192.168.56.10
 
