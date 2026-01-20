@@ -1,1 +1,10 @@
+# Build Notes
+
+## Day 0
+- Prepared VirtualBox networks: Host-only Mgmt + Internal Prod
+
+## Day 1
+- Created DC-Node-01 and DC-Node-02
+- Installed Ubuntu Server + OpenSSH
+- Updated packages and validated ssh service
 
