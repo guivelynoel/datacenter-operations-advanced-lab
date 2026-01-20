@@ -148,3 +148,19 @@ Restored correct ownership and permissions.
 Lesson Learned:
 Permissions are critical for shared storage reliability.
 
+## Incident 011 — NFS Export Configuration Syntax Error
+
+Impact:
+NFS exports not applied; shared storage unavailable.
+
+Root Cause:
+Invalid export option due to truncated keyword.
+
+Resolution:
+Corrected /etc/exports syntax and reapplied exportfs.
+
+Lesson Learned:
+NFS export options must be exact; one invalid option
+invalidates the entire export configuration.
+
+
