@@ -14,7 +14,7 @@
 
 ### DC-Node-02 (Compute / Client)
 - CPU: 2 vCPU
-- RAM: 4 GB
+- RAM: 2 GB
 - Disk: 40 GB
 - NIC1 (Mgmt): 192.168.56.11/24
 - NIC2 (Prod): 10.10.10.11/24
