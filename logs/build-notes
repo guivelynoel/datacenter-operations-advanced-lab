@@ -10,3 +10,39 @@
 - Updated system packages
 - Verified SSH service is running
 
+## Day 2
+- Configured dual network interfaces on both virtual machines
+- Assigned Adapter 1 as Host-only Network for management traffic
+- Assigned Adapter 2 as Internal Network (prod-net) for production traffic
+- Created Host-only Network globally in VirtualBox (macOS requirement)
+- Resolved invalid VM network configuration caused by missing host-only network
+- Verified both NICs detected by Ubuntu using `ip a`
+- Confirmed interfaces are up and ready for static IP assignment
+
+
+## Day 3
+- Identified correct Netplan configuration file based on Ubuntu version
+- Configured static IP addresses for management and production NICs on both nodes
+- Disabled DHCP on all interfaces
+- Secured Netplan configuration file permissions
+- Applied network changes safely using `netplan try` and `netplan apply`
+- Verified correct IP assignment using `ip a`
+- Validated connectivity between nodes on both management and production networks
+
+
+## Day 4
+- Hardened SSH configuration on both nodes
+- Restricted SSH access to management network
+- Identified systemd socket activation behavior on Ubuntu 24.04
+- Reloaded systemd units and restarted ssh.socket to apply changes
+- Validated SSH isolation using ss command
+
+
+
+
+
+> Note: Some entries were documented retroactively to ensure
+> complete and accurate operational records.
+
+
+
