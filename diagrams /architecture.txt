@@ -1,1 +1,31 @@
+DATA CENTER OPERATIONS LAB (2 VMs / Dual-NIC)
+
+                    (Mgmt Network - Host-only)
+                    192.168.56.0/24
+             +----------------------------------+
+             | macOS Host (VirtualBox)          |
+             | vboxnet0: 192.168.56.1/24        |
+             +------------------+---------------+
+                                |
+        +-----------------------+-----------------------+
+        |                                               |
++-------v--------+                               +------v--------+
+| DC-Node-01     |                               | DC-Node-02    |
+| Infra/Storage  |                               | Compute/Client|
+| Ubuntu Server  |                               | Ubuntu Server |
+| Mgmt: .10      |                               | Mgmt: .11     |
+| 192.168.56.10  |                               | 192.168.56.11 |
++-------+--------+                               +------+--------+
+        |                                               |
+        | (Prod Network - Internal Network "prod-net")  |
+        | 10.10.10.0/24                                 |
++-------v--------+                               +------v--------+
+| Prod NIC       |                               | Prod NIC      |
+| 10.10.10.10    |<------ NFS (Storage) -------> | 10.10.10.11   |
++----------------+                               +---------------+
+
+Rules:
+- SSH allowed ONLY on Mgmt IPs
+- NFS allowed ONLY on Prod IPs
+- Incident simulations include service outage and permissions failures
 
