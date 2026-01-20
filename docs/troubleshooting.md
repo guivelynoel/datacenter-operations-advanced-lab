@@ -102,6 +102,17 @@
   until systemd reloads units and restarts the socket
 
 **Resolution**
-1. Reloaded systemd units:
+1. Reloaded systemd units: systemctl daemon-reload
+2. Restarted SSH socket:systemctl restart ssh.socket
+
+**Validation**
+- `ss -tulpn | grep ssh` shows SSH listening only on management IP
+- SSH accessible via management network
+- SSH inaccessible via production network
+
+**Lesson Learned**
+- On socket-activated services, restarting the service
+alone is insufficient; the socket must be restarted.
+
 
 
