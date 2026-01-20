@@ -40,6 +40,11 @@
 
 
 
+- Temporarily enabled NAT adapter to allow package updates
+- Confirmed internet access for maintenance tasks
+- Removed NAT adapter after updates to preserve isolation
+
+
 
 > Note: Some entries were documented retroactively to ensure
 > complete and accurate operational records.
