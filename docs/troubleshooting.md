@@ -202,5 +202,12 @@ Client write access restored.
 - exportfs -v shows active export
 - Client successfully mounts and writes to share
 
+## Issue 014 — System Fails to Mount NFS After Reboot
+
+**Cause**
+Missing _netdev option in fstab.
+
+**Resolution**
+Added _netdev and validated with mount -a.
 
 
