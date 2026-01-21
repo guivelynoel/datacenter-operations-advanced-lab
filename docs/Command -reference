@@ -1,0 +1,139 @@
+# Command Reference — Data Center Operations Lab
+
+This section documents all key commands used during the lab, with short explanations
+of what each command does and why it was required.  
+The purpose is to demonstrate operational understanding and real-world practices.
+
+---
+
+## System Preparation & Package Management
+
+sudo apt update  
+→ Refreshes the package index to ensure the system installs the latest available packages.
+
+sudo apt install nfs-kernel-server -y  
+→ Installs the NFS server to allow exporting shared storage to other nodes.
+
+sudo apt install nfs-common -y  
+→ Installs NFS client utilities required to mount remote NFS shares.
+
+---
+
+## Network & Connectivity Validation
+
+ip a  
+→ Displays all network interfaces and assigned IP addresses to verify NIC configuration.
+
+ip route  
+→ Shows routing table to confirm network paths and default gateways.
+
+ping -c 3 8.8.8.8  
+→ Tests external connectivity, used during temporary maintenance access.
+
+---
+
+## SSH Service Validation & Control
+
+ss -tulpn | grep ssh  
+→ Displays listening SSH ports and confirms interface binding.
+
+systemctl status ssh  
+→ Verifies SSH service state.
+
+systemctl daemon-reload  
+→ Reloads systemd unit files after configuration changes.
+
+systemctl restart ssh.socket  
+→ Restarts SSH socket activation to apply binding changes on Ubuntu 24.04.
+
+---
+
+## NFS Server Configuration (DC-Node-01)
+
+mkdir -p /data/shared  
+→ Creates the directory to be exported via NFS.
+
+chown nobody:nogroup /data/shared  
+→ Assigns neutral ownership to avoid UID/GID conflicts.
+
+chmod 770 /data/shared  
+→ Sets controlled read/write permissions for shared storage.
+
+nano /etc/exports  
+→ Configures NFS exports and restricts access to the production subnet.
+
+exportfs -av  
+→ Applies and validates NFS exports with verbose output.
+
+exportfs -uav  
+→ Clears all active exports to remove cached or invalid configurations.
+
+systemctl status nfs-server  
+→ Confirms NFS server initialization (active/exited is expected behavior).
+
+---
+
+## NFS Client Operations (DC-Node-02)
+
+mkdir -p /mnt/shared  
+→ Creates local mount point for the NFS share.
+
+showmount -e 10.10.10.10  
+→ Lists available NFS exports from the server.
+
+mount 10.10.10.10:/data/shared /mnt/shared  
+→ Mounts the shared storage using the production network.
+
+touch /mnt/shared/test.txt  
+→ Verifies read/write access to the NFS share.
+
+---
+
+## Persistent Storage Configuration
+
+cp /etc/fstab /etc/fstab.bak  
+→ Creates a backup of fstab before modification.
+
+nano /etc/fstab  
+→ Defines persistent mounts to survive system reboots.
+
+mount -a  
+→ Safely validates fstab entries without rebooting.
+
+reboot  
+→ Confirms NFS mounts persist after reboot.
+
+---
+
+## Firewall Enforcement (UFW)
+
+ufw enable  
+→ Enables the firewall with a default-deny posture.
+
+ufw allow from 192.168.56.0/24 to any port 22 proto tcp  
+→ Allows SSH access only from the management network.
+
+ufw deny from 10.10.10.0/24 to any port 22  
+→ Blocks SSH access from the production network.
+
+ufw allow from 10.10.10.0/24 to any port 2049  
+→ Allows NFS traffic on the production network only.
+
+ufw status numbered  
+→ Displays active firewall rules for verification and auditing.
+
+---
+
+## Health & Operational Checks
+
+uptime  
+→ Displays system uptime and load averages.
+
+free -h  
+→ Shows memory usage in human-readable format.
+
+df -h  
+→ Displays disk usage to detect capacity issues.
+
+journalctl -xe  
+→ Reviews detailed system logs for troubleshooting service failures.
