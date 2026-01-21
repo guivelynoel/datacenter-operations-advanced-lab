@@ -1,13 +1,12 @@
 # Data Center Operations  Lab (2 VMs / Dual-NIC)
 
 ## Overview
-This repository documents a medium+ level, two-node lab designed to simulate
-real junior data center technician responsibilities: multi-NIC server deployment,
-management vs production network separation, secure remote access, shared storage,
-health checks, and incident-style troubleshooting.
+this repository documents a hands-on data center operations lab designed to simulate
+real-world infrastructure tasks performed by Data Center Technicians, IT Support,
+and Junior System Administrators.
 
-All work is performed in a lab environment on VirtualBox (macOS host) using the
-latest Ubuntu Server release available.
+The lab focuses on **network segmentation, secure access, shared storage, persistence,
+firewall enforcement, incident handling, and operational documentation**.
 
 ---
 
@@ -27,13 +26,25 @@ See: [diagrams/architecture.txt](diagrams/architecture.txt)
 Details: [diagrams/explanation.md](diagrams/explanation.md)
 
 ---
+## Architecture Summary
 
-## Environment
-- Host: macOS + VirtualBox
-- Guest OS: Ubuntu Server (latest)
-- Nodes:
-  - DC-Node-01 (Infrastructure / Storage / Services)
-  - DC-Node-02 (Compute / Client / Validation)
+- **2 Ubuntu Server 24.04 nodes**
+- **Management Network** (192.168.56.0/24)
+  - SSH access
+  - Administration & monitoring
+- **Production Network** (10.10.10.0/24)
+  - Application & storage traffic
+- **NFS Shared Storage**
+  - Exported only on production network
+- **Firewall (UFW)**
+  - Enforces traffic separation at the host level
+
+
+### Environment
+
+- OS: Ubuntu Server 24.04 LTS
+- Hypervisor: VirtualBox (macOS host)
+- Services: OpenSSH, NFS, UFW
 
 ### Networks
 - Mgmt (Host-only): 192.168.56.0/24
@@ -47,6 +58,15 @@ Details: [diagrams/explanation.md](diagrams/explanation.md)
 
 ---
 
+## Node Roles
+
+| Node | Role |
+|-----|-----|
+| DC-Node-01 | Infrastructure / NFS Storage Server |
+| DC-Node-02 | Client / Compute Node |
+
+
+
 ## Services Implemented
 - SSH remote administration (Mgmt only)
 - NFS shared storage (Prod only)
@@ -54,6 +74,31 @@ Details: [diagrams/explanation.md](diagrams/explanation.md)
 - Incident simulations + recovery documentation
 
 ---
+# Key Implementations
+
+### Networking
+- Dual NIC configuration per server
+- Static IP addressing
+- Clear separation of management and production traffic
+- SSH bound to management network only
+
+### Security
+- SSH restricted by interface and firewall rules
+- Production network explicitly blocked from SSH
+- Defense-in-depth using service binding + firewalling
+
+### Storage
+- NFS server deployed on production network only
+- Export restricted to production subnet
+- Persistent NFS mounts using `/etc/fstab`
+- `_netdev` option used for safe boot behavior
+
+### Reliability & Operations
+- Services validated after reboot
+- Controlled failure simulations (service outage, permissions)
+- Recovery procedures tested and documented
+- Health checks for CPU, memory, disk, network, and services
+
 
 ## Evidence & Documentation
 - Inventory: [docs/inventory.md](docs/inventory.md)
@@ -66,6 +111,15 @@ Details: [diagrams/explanation.md](diagrams/explanation.md)
 - Incidents: [logs/incidents.md](logs/incidents.md)
 
 ---
+## Documentation Structure
+
+- `docs/`
+  - Architecture, procedures, troubleshooting, command reference
+- `logs/`
+  - Build notes (day-by-day)
+  - Incident reports with root cause analysis
+
+---
 
 ## Config Examples (Sanitized)
 These are documentation examples only (no secrets):
@@ -74,9 +128,17 @@ These are documentation examples only (no secrets):
 - SSH config example: [configs/services/sshd_config.example](configs/services/sshd_config.example)
 
 ---
+# What This Lab Demonstrates
 
+- Real data center networking concepts
+- Operational troubleshooting methodology
+- Safe configuration practices
+- Clear technical documentation
+- Readiness for junior data center / IT operations roles
+
+- 
 ## Author
 Guively Noel  
 Location: Georgia, USA  
-GitHub: guivelyoel  
+GitHub: guivelynoel  
 LinkedIn: 
