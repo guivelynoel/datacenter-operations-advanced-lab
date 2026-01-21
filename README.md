@@ -114,9 +114,9 @@ Details: [diagrams/explanation.md](diagrams/explanation.md)
 ## Documentation Structure
 
 - `docs/`
-  - Architecture, procedures, troubleshooting, command reference
+  - Architecture, procedures, troubleshooting, command reference....
 - `logs/`
-  - Build notes (day-by-day)
+  - Build notes (day-by-day)...
   - Incident reports with root cause analysis
 
 ---
