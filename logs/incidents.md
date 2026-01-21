@@ -163,4 +163,18 @@ Lesson Learned:
 NFS export options must be exact; one invalid option
 invalidates the entire export configuration.
 
+## Incident 012 — NFS Pre-Start Export Failure
+
+Impact:
+NFS exports not applied during service start.
+
+Root Cause:
+Residual invalid export option in configuration file.
+
+Resolution:
+Sanitized /etc/exports and reapplied exports.
+
+Lesson Learned:
+Always validate exportfs output before restarting services.
+
 
